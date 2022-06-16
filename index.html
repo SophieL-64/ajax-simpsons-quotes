@@ -43,23 +43,24 @@
     ></script>
     <script>
       function fetchSimpsonJSON() {
-        // Feel free to download this HTML and edit it, to use another Pokemon ID
-        // const pokemonId = 1;
+        let i = 0;
         const url = `https://simpsons-quotes-api.herokuapp.com/quotes`;
+
         axios
           .get(url)
           .then(function (response) {
-            return response.data[0]; // response.data instead of response.json() with fetch
+            return response.data[i];
           })
           .then(function (simpson) {
             console.log("data decoded from JSON:", simpson);
 
-            // Build a block of HTML
             const simpsonHtml = `
-        <p><strong>${simpson.character}</strong></p>
-        <p>${simpson.quote}</p>
-        <img src="${simpson.image}" />
-      `;
+                  <button onclick="fetchSimpsonJSON()">Change the quote</button><br><br>
+                  <p><strong>${simpson.character}</strong></p>
+                  <p>${simpson.quote}</p>
+                  <img src="${simpson.image}" />
+            `;
+
             document.querySelector("#simpson-card").innerHTML = simpsonHtml;
           });
       }
